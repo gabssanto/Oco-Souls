@@ -5,10 +5,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float attackCooldown;
-    [SerializeField] private int damage;
-    private float cooldownTimer = Mathf.Infinity;
-
     private Rigidbody2D body;
     private Animator animator;
     private bool grounded;
@@ -57,13 +53,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Attack ()
     {
-        cooldownTimer += Time.deltaTime;
-         
-        if (cooldownTimer >= attackCooldown)
-        {
-            cooldownTimer = 0;
-            animator.SetTrigger("attack");
-        }
+        animator.SetBool("attack", attack);
+        attack = !attack;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
