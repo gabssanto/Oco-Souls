@@ -297,10 +297,11 @@ GameObject:
   m_Component:
   - component: {fileID: 361331145}
   - component: {fileID: 361331144}
-  - component: {fileID: 361331146}
   - component: {fileID: 361331147}
-  - component: {fileID: 361331148}
   - component: {fileID: 361331149}
+  - component: {fileID: 361331146}
+  - component: {fileID: 361331148}
+  - component: {fileID: 361331150}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -373,8 +374,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &361331146
-BoxCollider2D:
+--- !u!70 &361331146
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -386,19 +387,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.038300604, y: -0.0036567748}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.1623852, y: 0.30188298}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.040585253, y: 0}
+  m_Size: {x: 0.12589677, y: 0.32000002}
+  m_Direction: 0
 --- !u!50 &361331147
 Rigidbody2D:
   serializedVersion: 4
@@ -419,7 +410,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &361331148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +426,9 @@ MonoBehaviour:
   speed: 10
   attackCooldown: 0.15
   damage: 0
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!95 &361331149
 Animator:
   serializedVersion: 3
@@ -454,6 +448,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &361331150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361331143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f0b69e00e9b0e34c96a0c600db7831c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &387416896
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +582,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 361331145}
-  smoothSpeed: 0.125
   offset: {x: 1, y: 2.5, z: -10}
 --- !u!20 &519420031
 Camera:
@@ -913,7 +918,7 @@ GameObject:
   - component: {fileID: 824489028}
   - component: {fileID: 824489027}
   - component: {fileID: 824489026}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -928,7 +933,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824489024}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1009396693}
@@ -27582,9 +27587,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1009396693}
   - component: {fileID: 1009396692}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
