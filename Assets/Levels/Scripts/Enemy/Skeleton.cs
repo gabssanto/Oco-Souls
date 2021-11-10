@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour
 {
+    [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
     [SerializeField] private float range;
-    [SerializeField] private float colliderDistance;
     [SerializeField] private int damage;
+
+    [Header("Collider Parameters")]
+    [SerializeField] private float colliderDistance;
     [SerializeField] private CapsuleCollider2D boxCollider;
+
+    [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
 
     private Animator animator;
     private Health playerHealth;
     private float cooldownTimer = Mathf.Infinity;
 
+    private SkeletonPatrol enemyPatrol;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        enemyPatrol = GetComponentInParent<SkeletonPatrol>();
     }
 
     private void Update()
@@ -32,6 +40,8 @@ public class Skeleton : MonoBehaviour
             animator.SetTrigger("attack");
 
         }
+
+        if (enemyPatrol != null) enemyPatrol.enabled = !PlayerInSight();
     }
 
     private void DamagePlayer()

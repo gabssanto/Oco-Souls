@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private float attackCooldown;
+    [SerializeField] private float damage;
     private Animator animator;
     private PlayerMovement playerMovement;
 
@@ -14,15 +15,10 @@ public class PlayerAttack : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        print("hello there");
+        if (collision.tag == "Enemy")
+            collision.GetComponent<Health>().TakeDamage(damage);
     }
 }
