@@ -33,7 +33,9 @@ public class Health : MonoBehaviour
                 GetComponentInParent<SkeletonPatrol>().enabled = false;
 
             if (GetComponent<Skeleton>() != null)
+            {
                 GetComponent<Skeleton>().enabled = false;
+            }
 
             dead = true;
         }

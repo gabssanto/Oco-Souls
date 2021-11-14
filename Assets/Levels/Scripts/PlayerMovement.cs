@@ -9,6 +9,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Attack Params")]
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRange = 0.5f;
+    [SerializeField] LayerMask enemyLayers;
+
+
     private float cooldownTimer = Mathf.Infinity;
     private Rigidbody2D body;
     private Animator animator;
@@ -68,7 +74,20 @@ public class PlayerMovement : MonoBehaviour
         {
             cooldownTimer = 0;
             animator.SetTrigger("attack");
+
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+            foreach(Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<Health>().TakeDamage(damage);
+            }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint)
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
     private bool isGrounded()
