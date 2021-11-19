@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] RectTransform fader;
     public void PlayGame ()
     {
+        //StartCoroutine(ButtonDelay());
         fader.gameObject.SetActive(true);
 
         LeanTween.alpha(fader, 0, 0);
@@ -21,3 +22,4 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+}
