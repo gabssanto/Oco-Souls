@@ -5,13 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] RectTransform fader;
     public void PlayGame ()
     {
-        SceneManager.LoadScene("MainLevel");
+        fader.gameObject.SetActive(true);
+
+        LeanTween.alpha(fader, 0, 0);
+        LeanTween.alpha(fader, 1, 1f).setOnComplete(() =>
+        {
+            SceneManager.LoadScene("MainLevel");
+        });
     }
 
     public void QuitGame ()
     {
         Application.Quit();
     }
-}
