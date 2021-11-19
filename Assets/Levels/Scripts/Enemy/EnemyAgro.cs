@@ -51,13 +51,13 @@ public class EnemyAgro : MonoBehaviour
             transform.localScale = new Vector2(-1, 1); 
         }
 
-        animator.Play("Walk");
+        animator.SetBool("moving", true);
     }
 
     void StopChasingPlayer()
     {
         rb2d.velocity = new Vector2(0, 0);
 
-        animator.Play("Idle");
+        animator.SetBool("moving", false);
     }
 }
