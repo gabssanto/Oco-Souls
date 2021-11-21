@@ -27,8 +27,9 @@ public class Health : MonoBehaviour
             animator.SetTrigger("die");
 
             if (GetComponent<PlayerMovement>() != null)
+            {
                 GetComponent<PlayerMovement>().enabled = false;
-
+            }
             if (GetComponentInParent<SkeletonPatrol>() != null)
                 GetComponentInParent<SkeletonPatrol>().enabled = false;
 
