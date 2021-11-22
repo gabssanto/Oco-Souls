@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fader: {fileID: 1900497671}
+  eventSystem: {fileID: 2031226228}
 --- !u!1 &192596617
 GameObject:
   m_ObjectHideFlags: 0

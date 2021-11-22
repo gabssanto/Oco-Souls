@@ -7,7 +7,7 @@ public class GameOver : MonoBehaviour
 {
     public void ReplayGame()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void QuitGame()

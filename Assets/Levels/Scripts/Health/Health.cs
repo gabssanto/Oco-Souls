@@ -6,6 +6,7 @@ public class Health : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] RectTransform fader;
     public float currentHealth { get; private set; }
+
     private Animator animator;
     private bool dead;
 

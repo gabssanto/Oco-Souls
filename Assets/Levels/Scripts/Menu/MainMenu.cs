@@ -6,6 +6,13 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] RectTransform fader;
+    [SerializeField] GameObject eventSystem;
+
+    private void Start()
+    {
+        DontDestroyOnLoad(eventSystem);
+    }
+
     public void PlayGame ()
     {
         //StartCoroutine(ButtonDelay());

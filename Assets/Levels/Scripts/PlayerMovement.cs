@@ -14,8 +14,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
 
+    public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
+    //public static Vector2 lastCheckPointPos = new Vector2(86.42f, -108.89f);
 
     private float cooldownTimer = Mathf.Infinity;
+
     private Rigidbody2D body;
     private Animator animator;
     private CapsuleCollider2D capsuleCollider;
@@ -27,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos;
     }
 
     // Start is called before the first frame update
