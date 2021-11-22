@@ -3,6 +3,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] RectTransform fader;
     public float currentHealth { get; private set; }
     private Animator animator;
     private bool dead;
@@ -29,6 +31,17 @@ public class Health : MonoBehaviour
             if (GetComponent<PlayerMovement>() != null)
             {
                 GetComponent<PlayerMovement>().enabled = false;
+
+                fader.gameObject.SetActive(true);
+
+                LeanTween.alpha(fader, 0, 0);
+                LeanTween.alpha(fader, 1, 1.5f).setOnComplete(() =>
+                {
+                    fader.gameObject.SetActive(false);
+                    gameOverPanel.SetActive(true);
+                });
+
+                currentHealth = 10;
             }
             if (GetComponentInParent<SkeletonPatrol>() != null)
                 GetComponentInParent<SkeletonPatrol>().enabled = false;
