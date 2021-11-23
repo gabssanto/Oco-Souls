@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
 
-    public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
-    //public static Vector2 lastCheckPointPos = new Vector2(86.42f, -108.89f);
+    //public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
+    public static Vector2 lastCheckPointPos = new Vector2(86.42f, -108.89f);
 
     private float cooldownTimer = Mathf.Infinity;
 

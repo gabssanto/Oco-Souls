@@ -3,6 +3,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
+
+    [Header("Player and Boss Only")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] RectTransform fader;
     public float currentHealth { get; private set; }

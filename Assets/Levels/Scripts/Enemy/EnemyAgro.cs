@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAgro : MonoBehaviour
 {
-    [SerializeField] GameObject Skeleton;
+    [SerializeField] GameObject Enemy;
 
     Animator animator;
 
@@ -17,7 +17,7 @@ public class EnemyAgro : MonoBehaviour
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        animator = Skeleton.GetComponent<Animator>();
+        animator = Enemy.GetComponent<Animator>();
     }
 
     

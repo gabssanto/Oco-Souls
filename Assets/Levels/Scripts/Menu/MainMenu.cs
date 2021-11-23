@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] RectTransform fader;
     [SerializeField] GameObject eventSystem;
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(eventSystem);
     }
