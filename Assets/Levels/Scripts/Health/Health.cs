@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -24,7 +25,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth > 0)
         {
-            animator.SetTrigger("hurt");
+            
             //iframes
         }
         else if (!dead)
@@ -33,6 +34,7 @@ public class Health : MonoBehaviour
 
             if (GetComponent<PlayerMovement>() != null)
             {
+                
                 GetComponent<PlayerMovement>().enabled = false;
 
                 fader.gameObject.SetActive(true);
@@ -46,12 +48,10 @@ public class Health : MonoBehaviour
 
                 currentHealth = 10;
             }
-            if (GetComponentInParent<SkeletonPatrol>() != null)
-                GetComponentInParent<SkeletonPatrol>().enabled = false;
-
-            if (GetComponent<Skeleton>() != null)
+            if (GetComponentInParent<EnemyBehaviour>() != null)
             {
-                GetComponent<Skeleton>().enabled = false;
+                GetComponentInParent<EnemyBehaviour>().enabled = false;
+                GetComponentInChildren<HotZoneCheck>().enabled = false;
             }
 
             dead = true;
@@ -66,10 +66,9 @@ public class Health : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
             TakeDamage(1);
         else if (Input.GetKeyDown(KeyCode.R))
-            PlusHealth();
-            
+            PlusHealth();*/  
     }
 }

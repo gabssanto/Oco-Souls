@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class SpikeTrap : MonoBehaviour
 {
-
+    [SerializeField] float damage;
     [SerializeField] private Health health;
     private void Reset()
     {
@@ -16,7 +16,7 @@ public class SpikeTrap : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            health.TakeDamage(5);
+            health.TakeDamage(damage);
         }
     }
 }

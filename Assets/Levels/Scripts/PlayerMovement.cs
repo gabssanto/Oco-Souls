@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
     [SerializeField] private LayerMask groundLayer;
@@ -15,12 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask enemyLayers;
 
     //public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
-    public static Vector2 lastCheckPointPos = new Vector2(86.42f, -108.89f);
+    public static Vector2 lastCheckPointPos = new Vector2(247f, -171f);
 
     private float cooldownTimer = Mathf.Infinity;
 
     private Rigidbody2D body;
-    private Animator animator;
+    private Animator anim;
     private CapsuleCollider2D capsuleCollider;
 
 
@@ -28,27 +28,19 @@ public class PlayerMovement : MonoBehaviour
     {
         // Interage com o codigo do Unity diretamente
         body = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     private void Update()
     {
         HorizontalMove();
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded()) Jump();
-        else if (Input.GetKey(KeyCode.Mouse0) && isGrounded()) Attack();
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && isGrounded()) Jump();
+        else if ((Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.J)) && isGrounded()) Attack();
 
-
-        animator.SetBool("grounded", isGrounded());
+        anim.SetBool("grounded", isGrounded());
     }
 
     private void HorizontalMove ()
@@ -61,13 +53,13 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput > 0.01f) transform.localScale = new Vector3(10, 10, 10);
         else if (horizontalInput < -0.01f) transform.localScale = new Vector3(-10, 10, 10);
 
-        animator.SetBool("run", horizontalInput != 0);
+        anim.SetBool("run", horizontalInput != 0);
     }
 
     private void Jump ()
     {
         body.velocity = new Vector2(body.velocity.x, speed);
-        animator.SetTrigger("jump");
+        anim.SetTrigger("jump");
     }
 
     private void Attack ()
@@ -77,8 +69,8 @@ public class PlayerMovement : MonoBehaviour
         if (cooldownTimer >= attackCooldown)
         {
             cooldownTimer = 0;
-            animator.SetTrigger("attack");
-
+            anim.SetTrigger("attack");
+            
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
             foreach(Collider2D enemy in hitEnemies)
