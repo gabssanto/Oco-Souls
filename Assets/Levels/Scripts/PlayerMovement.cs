@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask enemyLayers;
 
     //public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
-    public static Vector2 lastCheckPointPos = new Vector2(247f, -171f);
+    public static Vector2 lastCheckPointPos = new Vector2(307f, -140f);
 
     private float cooldownTimer = Mathf.Infinity;
 
