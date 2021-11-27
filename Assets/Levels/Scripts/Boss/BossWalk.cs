@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class BossWalk : StateMachineBehaviour
 {
-    public float speed;
+    [SerializeField] float speed;
+    [SerializeField] float attackRange;
 
-    Transform player;
-    Rigidbody2D rb;
-    Boss boss;
+    #region Private Variables
+    private Transform player;
+    private Rigidbody2D rb;
+    private Boss boss;
+    private int rand;
+    private Health health;
+    #endregion
 
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -16,6 +21,16 @@ public class BossWalk : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
         boss = animator.GetComponent<Boss>();
+        health = animator.GetComponent<Health>();
+
+        if (health.currentHealth >= 13)
+        {
+            rand = Random.Range(0, 2);
+        }
+        else
+        {
+            rand = Random.Range(0, 3);
+        }
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -27,6 +42,22 @@ public class BossWalk : StateMachineBehaviour
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         
         rb.MovePosition(newPos);
+        
+        if (Vector2.Distance(player.position, rb.position) <= attackRange)
+        {
+            if (rand == 0)
+            {
+                animator.SetTrigger("lightAttack");
+            }
+            else if (rand == 1)
+            {
+                animator.SetTrigger("heavyAttack");
+            }
+            else
+            {
+                animator.SetTrigger("attack");
+            }
+        }
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
