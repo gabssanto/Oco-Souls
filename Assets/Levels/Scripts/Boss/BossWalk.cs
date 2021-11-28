@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BossWalk : StateMachineBehaviour
 {
-    [SerializeField] float speed;
+    public float speed;
+
     [SerializeField] float attackRange;
 
     #region Private Variables
@@ -42,7 +43,7 @@ public class BossWalk : StateMachineBehaviour
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         
         rb.MovePosition(newPos);
-        
+
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             if (rand == 0)

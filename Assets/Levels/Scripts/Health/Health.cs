@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [Header("Player and Boss Only")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] RectTransform fader;
+
     public float currentHealth { get; private set; }
 
     private Animator animator;
@@ -17,11 +18,22 @@ public class Health : MonoBehaviour
     {
         currentHealth = startingHealth;
         animator = GetComponent<Animator>();
+        
     }
 
     public void TakeDamage(float _damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        if (GetComponent<Boss>() != null)
+        {
+            if (!(animator.GetCurrentAnimatorStateInfo(0).IsName("Taunt")))
+            {
+                currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+            }
+        }
+        else
+        {
+            currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+        }
 
         if (currentHealth > 0)
         {
@@ -53,7 +65,18 @@ public class Health : MonoBehaviour
                 GetComponentInParent<EnemyBehaviour>().enabled = false;
                 GetComponentInChildren<HotZoneCheck>().enabled = false;
             }
+            if (GetComponent<Boss>() != null)
+            {
+                GetComponent<Boss>().enabled = false;
 
+                fader.gameObject.SetActive(true);
+                LeanTween.alpha(fader, 0, 0);
+                LeanTween.alpha(fader, 1, 8f).setOnComplete(() =>
+                {
+                    fader.gameObject.SetActive(false);
+                    gameOverPanel.SetActive(true);
+                });
+            }
             dead = true;
         }
     }

@@ -6,6 +6,25 @@ public class Boss : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] bool isFlipped = false;
+    [SerializeField] Animator animator;
+    private Health health;
+    private BossWalk bossWalk;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+        health = animator.GetComponent<Health>();
+        bossWalk = animator.GetBehaviour<BossWalk>();
+    }
+    private void Update()
+    {
+        if (health.currentHealth == 12)
+        {
+            animator.SetTrigger("taunt");
+            health.TakeDamage(1);
+            bossWalk.speed = bossWalk.speed + 1;
+        }
+    }
 
     public void LookAtPlayer()
     {

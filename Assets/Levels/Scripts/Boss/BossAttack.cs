@@ -19,17 +19,14 @@ public class BossAttack : MonoBehaviour, ICollisionHandler
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("LightAttack"))
             {
                 other.GetComponent<Health>().TakeDamage(2);
-                Debug.Log("LightAttack DMG=" + 2);
             }
             else if (anim.GetCurrentAnimatorStateInfo(0).IsName("HeavyAttack"))
             {
                 other.GetComponent<Health>().TakeDamage(4);
-                Debug.Log("HeavyAttack DMG="+ 4);
             }
             else
             {
                 other.GetComponent<Health>().TakeDamage(3);
-                Debug.Log("FullAttack DMG=" + 3);
             }
         }
     }
