@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, ICollisionHandler
 {
     public float speed;
     [SerializeField] private float attackCooldown;
@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
             cooldownTimer = 0;
             anim.SetTrigger("attack");
             
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+            /*Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
             foreach(Collider2D enemy in hitEnemies)
             {
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     enemy.GetComponent<Health>().TakeDamage(damage);
                 }
-            }
+            }*/
         }
     }
 
@@ -106,6 +106,14 @@ public class PlayerMovement : MonoBehaviour
     private void Slash()
     {
         slash.Play();
+    }
+
+    public void CollisionEnter(string colliderName, GameObject other)
+    {
+        if (colliderName == "KnifeHitBox" && other.tag == "Enemy")
+        {
+            other.GetComponent<Health>().TakeDamage(damage);
+        }
     }
 }
  
