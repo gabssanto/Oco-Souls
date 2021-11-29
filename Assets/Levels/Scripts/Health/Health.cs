@@ -4,6 +4,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float startingHealth;
+    [SerializeField] AudioSource hitEffect;
 
     [Header("Player and Boss Only")]
     [SerializeField] private GameObject gameOverPanel;
@@ -23,6 +24,8 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        hitEffect.Play();
+
         if (GetComponent<Boss>() != null)
         {
             if (!(animator.GetCurrentAnimatorStateInfo(0).IsName("Taunt")))
@@ -46,7 +49,6 @@ public class Health : MonoBehaviour
 
             if (GetComponent<PlayerMovement>() != null)
             {
-                
                 GetComponent<PlayerMovement>().enabled = false;
 
                 fader.gameObject.SetActive(true);
@@ -56,6 +58,7 @@ public class Health : MonoBehaviour
                 {
                     fader.gameObject.SetActive(false);
                     gameOverPanel.SetActive(true);
+                    transform.gameObject.SetActive(false);
                 });
 
                 currentHealth = 10;

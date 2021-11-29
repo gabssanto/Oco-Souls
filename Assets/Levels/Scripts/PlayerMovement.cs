@@ -13,23 +13,25 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform attackPoint;
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] LayerMask enemyLayers;
+    [Header("Sound Effects")]
+    [SerializeField] AudioSource footstep;
+    [SerializeField] AudioSource slash;
 
-    //public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
-    public static Vector2 lastCheckPointPos = new Vector2(307f, -140f);
+    public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
+    //public static Vector2 lastCheckPointPos = new Vector2(307f, -140f);
 
     private float cooldownTimer = Mathf.Infinity;
 
     private Rigidbody2D body;
     private Animator anim;
     private CapsuleCollider2D capsuleCollider;
-
-
     private void Awake()
     {
         // Interage com o codigo do Unity diretamente
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+
         GameObject.FindGameObjectWithTag("Player").transform.position = lastCheckPointPos;
     }
 
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         HorizontalMove();
 
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && isGrounded()) Jump();
-        else if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Z)) && isGrounded()) Attack();
+        else if ((Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.J)) && isGrounded()) Attack();
 
         anim.SetBool("grounded", isGrounded());
     }
@@ -94,6 +96,16 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(capsuleCollider.bounds.center,
             capsuleCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
         return raycastHit.collider != null;
+    }
+
+    private void Footsteps()
+    {
+        footstep.Play();
+    }
+
+    private void Slash()
+    {
+        slash.Play();
     }
 }
  
