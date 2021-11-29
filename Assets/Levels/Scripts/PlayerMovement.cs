@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         HorizontalMove();
 
         if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && isGrounded()) Jump();
-        else if ((Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Z) || Input.GetKey(KeyCode.J)) && isGrounded()) Attack();
+        else if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Z)) && isGrounded()) Attack();
 
         anim.SetBool("grounded", isGrounded());
     }
@@ -75,7 +75,10 @@ public class PlayerMovement : MonoBehaviour
 
             foreach(Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Health>().TakeDamage(damage);
+                if (enemy.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+                {
+                    enemy.GetComponent<Health>().TakeDamage(damage);
+                }
             }
         }
     }
