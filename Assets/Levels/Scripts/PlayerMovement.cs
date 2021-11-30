@@ -17,8 +17,9 @@ public class PlayerMovement : MonoBehaviour, ICollisionHandler
     [SerializeField] AudioSource footstep;
     [SerializeField] AudioSource slash;
 
-    //public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
-    public static Vector2 lastCheckPointPos = new Vector2(307f, -140f);
+    public static Vector2 lastCheckPointPos = new Vector2(-7.517738f, -88.60466f);
+    //public static Vector2 lastCheckPointPos = new Vector2(24f, -230f);
+    //public static Vector2 lastCheckPointPos = new Vector2(307f, -140f);
 
     private float cooldownTimer = Mathf.Infinity;
 
