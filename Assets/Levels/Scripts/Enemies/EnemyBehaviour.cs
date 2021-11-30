@@ -14,11 +14,14 @@ public class EnemyBehaviour : MonoBehaviour, ICollisionHandler
     [SerializeField] private float attackDistance; // Minimum attack distance
     [SerializeField] private float moveSpeed;
     [SerializeField] private float cooldown;
+    [SerializeField] float damage;
     [Header("Patrolling Area")]
     [SerializeField] Transform leftLimit;
     [SerializeField] Transform rightLimit;
-
-    [SerializeField] float damage;
+    [Header("Sound Effects")]
+    [SerializeField] AudioSource attackSound;
+    [SerializeField] AudioSource deathSound;
+    
     #endregion
     #region Public Variables
     [Header("Player Detection")]
@@ -166,5 +169,14 @@ public class EnemyBehaviour : MonoBehaviour, ICollisionHandler
         {
             other.GetComponent<Health>().TakeDamage(damage);
         }
+    }
+
+    public void AttackSound()
+    {
+        attackSound.Play();
+    }
+    public void DeathSound()
+    {
+        deathSound.Play();
     }
 }
