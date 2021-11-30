@@ -9,16 +9,22 @@ public class Health : MonoBehaviour
     [Header("Player and Boss Only")]
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] RectTransform fader;
+    [SerializeField] GameObject boss;
 
     public float currentHealth { get; private set; }
 
     private Animator animator;
     private bool dead;
+    private AudioSource bossMusic;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         animator = GetComponent<Animator>();
+        if (GetComponent<PlayerMovement>() != null)
+        {
+            bossMusic = boss.GetComponent<AudioSource>();
+        }
     }
 
     public void TakeDamage(float _damage)
@@ -49,6 +55,7 @@ public class Health : MonoBehaviour
             if (GetComponent<PlayerMovement>() != null)
             {
                 GetComponent<PlayerMovement>().enabled = false;
+                
 
                 fader.gameObject.SetActive(true);
 
@@ -56,8 +63,11 @@ public class Health : MonoBehaviour
                 LeanTween.alpha(fader, 1, 1.5f).setOnComplete(() =>
                 {
                     fader.gameObject.SetActive(false);
+
+                    gameObject.transform.Translate(-7f, -86f, -0f);
+                    bossMusic.Stop();
+
                     gameOverPanel.SetActive(true);
-                    transform.gameObject.SetActive(false);
                 });
 
                 currentHealth = 10;

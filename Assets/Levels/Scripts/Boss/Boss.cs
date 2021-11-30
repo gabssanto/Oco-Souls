@@ -5,8 +5,15 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [SerializeField] Transform player;
-    [SerializeField] bool isFlipped = false;
     [SerializeField] Animator animator;
+    [SerializeField] bool isFlipped = false;
+
+    [Header("Sound Effects")]
+    [SerializeField] AudioSource footstep;
+    [SerializeField] AudioSource stab;
+    [SerializeField] AudioSource stomp;
+    [SerializeField] AudioSource swoosh;
+
     private Health health;
     private BossWalk bossWalk;
 
@@ -45,5 +52,22 @@ public class Boss : MonoBehaviour
 
             isFlipped = true;
         }
+    }
+
+    private void Footsteps()
+    {
+        footstep.Play();
+    }
+    private void Stab()
+    {
+        stab.Play();
+    }
+    private void Stomp()
+    {
+        stomp.Play();
+    }
+    private void Swoosh()
+    {
+        swoosh.Play();
     }
 }
