@@ -16,6 +16,7 @@ public class Health : MonoBehaviour
     private Animator animator;
     private bool dead;
     private AudioSource bossMusic;
+    private int healLimit;
 
     private void Awake()
     {
@@ -95,15 +96,21 @@ public class Health : MonoBehaviour
 
     public void PlusHealth()
     {
-        if (currentHealth < 10)
-            currentHealth += 1;
+        currentHealth += 4;
     }
-
+    private void Start()
+    {
+        healLimit = 0;
+    }
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.E))
-            TakeDamage(1);
-        else if (Input.GetKeyDown(KeyCode.R))
-            PlusHealth();*/  
+        if ((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.K)) && healLimit < 1)
+        {
+            if (currentHealth < 7)
+            {
+                PlusHealth();
+                healLimit++;
+            } 
+        }
     }
 }
