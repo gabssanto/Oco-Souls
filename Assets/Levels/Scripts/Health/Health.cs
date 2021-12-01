@@ -64,7 +64,7 @@ public class Health : MonoBehaviour
                 {
                     fader.gameObject.SetActive(false);
 
-                    gameObject.transform.Translate(-7f, -86f, -0f);
+                    gameObject.transform.position = new Vector2(-19f, -72f);
                     bossMusic.Stop();
 
                     gameOverPanel.SetActive(true);
