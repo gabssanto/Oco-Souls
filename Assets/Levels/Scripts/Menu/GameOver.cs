@@ -30,8 +30,6 @@ public class GameOver : MonoBehaviour
                     Application.Quit();
                 });
             });
-            });
-
-        Application.Quit();
+        });
     }
 }
