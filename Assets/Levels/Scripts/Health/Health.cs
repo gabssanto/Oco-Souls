@@ -11,21 +11,25 @@ public class Health : MonoBehaviour
     [SerializeField] RectTransform fader;
     [SerializeField] GameObject boss;
 
-    public float currentHealth { get; private set; }
+    public float currentHealth { get; set; }
 
     private Animator animator;
     private bool dead;
     private AudioSource bossMusic;
     private int healLimit;
+    private GameObject player;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         animator = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
         if (GetComponent<PlayerMovement>() != null)
         {
             bossMusic = boss.GetComponent<AudioSource>();
         }
+
     }
 
     public void TakeDamage(float _damage)
@@ -96,7 +100,7 @@ public class Health : MonoBehaviour
 
     public void PlusHealth()
     {
-        currentHealth += 4;
+        player.GetComponent<Health>().currentHealth += 4;
     }
     private void Start()
     {
