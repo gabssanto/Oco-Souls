@@ -17,13 +17,11 @@ public class Health : MonoBehaviour
     private bool dead;
     private AudioSource bossMusic;
     private int healLimit;
-    private GameObject player;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         animator = GetComponent<Animator>();
-        player = GameObject.FindGameObjectWithTag("Player");
 
         if (GetComponent<PlayerMovement>() != null)
         {
@@ -100,7 +98,7 @@ public class Health : MonoBehaviour
 
     public void PlusHealth()
     {
-        player.GetComponent<Health>().currentHealth += 4;
+        currentHealth += 4;
     }
     private void Start()
     {
@@ -108,6 +106,7 @@ public class Health : MonoBehaviour
     }
     private void Update()
     {
+
         if ((Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.K)) && healLimit < 1)
         {
             if (currentHealth < 7)
